@@ -75,7 +75,140 @@ body {
     transform: scale(1.2);
 }
 
-.container  {
+/* === ZWEISPALTIGES LAYOUT FÜR DEN OBEREN BEREICH === */
+.upper {
+    display: grid; /* Aktiviert Grid für den oberen Bereich */
+    /* Definiert zwei Spalten:
+       - 1. Spalte (für .box): Nimmt 1 Teil des Platzes, mind. 300px
+       - 2. Spalte (für .container): Nimmt 2 Teile des Platzes, mind. 500px
+    */
+    grid-template-columns: minmax(300px, 1fr) minmax(500px, 2fr);
+    gap: 30px; /* Abstand zwischen den Spalten */
+    max-width: 1400px; /* Maximale Breite für diesen Bereich */
+    margin: 40px auto; /* Zentriert den oberen Bereich horizontal */
+    align-items: flex-start; /* Richtet Boxen oben aus */
+}
+
+/* === LINKE SPALTE (.box) ANPASSEN === */
+.box {
+    /* Deine bestehenden .box Stile (color, padding, max-width etc.) */
+    color: #ecf0f1;
+    padding: 40px;
+    /* max-width: 1500px; <- Entfernen oder reduzieren */
+    max-width: none; /* Grid steuert die Breite */
+    /* margin: 80px auto auto 40px; <- Ersetzen */
+    margin: 0; /* Alte Margins entfernen, Grid positioniert */
+
+    /* Optional: Hintergrund hinzufügen, falls gewünscht */
+    /* background-color: rgba(44, 62, 80, 0.7); */
+    /* border-radius: 10px; */
+    box-sizing: border-box;
+}
+/* Deine Stile für .profile-pic, .box p, .social-icon bleiben bestehen */
+/* Stelle sicher, dass .profile-pic eine vernünftige feste Größe hat, z.B. 150px */
+.profile-pic {
+    max-width: 100%; /* Max-width kann bleiben, aber feste Größe ist besser */
 
 }
-.flip-card
+.box p {
+    max-width: 100%; /* Erlaubt Text, die Breite der Box zu nutzen */
+}
+
+/* === RECHTE SPALTE (.container mit Flip Cards) === */
+.container {
+    margin: 0; /* Alte Margins entfernen */
+    padding: 0;
+    box-sizing: border-box;
+
+    /* --- Interne Anordnung der Flip Cards (Flexbox) --- */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Zentriert Karten im Container */
+    align-items: flex-start;
+}
+
+
+/* === FLIP CARD STYLING === */
+.flip-card {
+    flex-basis: calc(50% - 10px); /* Zwei Karten nebeneinander */
+    min-width: 250px;
+    height: 250px; /* Höhe der Karte */
+    background-color: transparent;
+    perspective: 1000px;
+    cursor: pointer;
+    border: 2px solid #555;       /* RAND HINZUGEFÜGT */
+    border-radius: 10px;          /* Ecken abrunden */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;    /* Animation für den Flip */
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+    border-radius: 8px; /* Innenradius */
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: rgba(69, 75, 80, 0.85); /* Standard-Hintergrund */
+    color: #f1f1f1;
+}
+
+.flip-card-back {
+    background-color: rgba(44, 62, 80, 0.95); /* Dunklerer Hintergrund für Rückseite */
+    color: white;
+    transform: rotateY(180deg);   /* Rückseite startet gedreht */
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* Titel und Text Styling */
+.flip-card-title h2 { margin: 0 0 10px 0; font-size: 1.3em; }
+.flip-card-front p { font-size: 0.9em; margin: 0; }
+.flip-card-back p { font-size: 0.9em; line-height: 1.4; }
+.flip-card-back strong { color: #aaeaff; }
+
+
+/* === DER HOVER-EFFEKT ZUM DREHEN === */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg); /* Dreht den inneren Container beim Hovern */
+}
+
+
+/* === TERMINAL UNTERHALB POSITIONIEREN === */
+#terminal {
+    /* Deine bestehenden Terminal-Stile (Hintergrund, Farbe etc.) */
+    background-color: #1a1a1a;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 15px; /* Padding ggf. anpassen */
+    height: 300px; /* Höhe ggf. anpassen */
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+
+    /* --- Positionierung unter .upper --- */
+    max-width: 1400px;     /* Gleiche max-width wie .upper */
+    margin: 40px auto 0 auto; /* 40px Abstand nach oben, zentriert */
+}
+/* Stile für #terminal-output, #terminal-input-line etc. bleiben */
+/* ... */
