@@ -1,0 +1,81 @@
+body {
+    background-color: #333; /* Dunkler Hintergrund für die Seite */
+    margin: 0;
+    padding: 2em;
+}
+
+#terminal {
+    background-color: #1a1a1a; /* Sehr dunkler Hintergrund für das Terminal */
+    color: #00ff00;            /* Grüne Schrift */
+    font-family: 'Courier New', Courier, monospace; /* Monospace-Schrift */
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 40px;
+    height: 400px; /* Feste Höhe, damit es wie ein Fenster aussieht */
+    overflow-y: scroll; /* Macht den Ausgabebereich scrollbar */
+    display: flex; /* Flexbox für einfache Anordnung */
+    flex-direction: column; /* Elemente untereinander */
+}
+
+#terminal-output {
+    flex-grow: 1; /* Nimmt allen verfügbaren Platz nach oben ein */
+    margin-bottom: 10px;
+}
+
+#terminal-output p {
+    margin: 0 0 5px 0; /* Weniger Abstand zwischen den Zeilen */
+    white-space: pre-wrap; /* Erhält Leerzeichen und Zeilenumbrüche */
+    word-break: break-all; /* Bricht lange Wörter um */
+}
+
+#terminal-input-line {
+    display: flex; /* Prompt und Input nebeneinander */
+    align-items: center;
+}
+
+.prompt {
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+#terminal-input {
+    background-color: transparent; /* Transparenter Hintergrund */
+    border: none;                /* Kein Rand */
+    color: inherit;              /* Erbt die grüne Schriftfarbe */
+    font-family: inherit;        /* Erbt die Monospace-Schrift */
+    font-size: 1em;
+    outline: none;               /* Keine Umrandung beim Fokussieren */
+    flex-grow: 1;                /* Nimmt den restlichen Platz in der Zeile ein */
+}
+
+ /*Wähle das Element mit der Klasse "profile-pic" aus */
+.profile-pic {
+    max-width: 30%;
+}
+/* === Styling für den Haupt-Informations-Container === */
+.box {
+    /*background-color: #2c3e50; !* Ein dunkles Blau-Grau als Hintergrund *!*/
+    color: #ecf0f1;           /* Helle Schriftfarbe für Kontrast */
+    padding: 40px;             /* Innenabstand, damit der Inhalt nicht am Rand klebt */
+    max-width: 1500px;         /* Maximale Breite des Containers */
+
+    /*open unten rechts links*/
+    margin: 80px auto auto 40px;
+}
+.box p {
+    max-width: 30%;
+}
+
+.social-icon{
+    color: #ecf0f1;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.social-icon:hover {
+    /*color: #ffffff;*/
+    transform: scale(1.2);
+}
+
+.container  {
+
+}
+.flip-card
