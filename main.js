@@ -1,7 +1,11 @@
 // Warte, bis das HTML geladen ist
 document.addEventListener('DOMContentLoaded', function() {
-    //     
-
+    // document ist representant für ganzes index.html  
+    // DOMContentloaded bis ganzes html geladen ist , dann kann allg functions ausgeführt werden
+    // function is der block der ausgeführt wird also alles in {}
+    
+    
+    
     const terminalOutput = document.getElementById('terminal-output');
     const terminalInput = document.getElementById('terminal-input');
 
@@ -28,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event Listener für die Enter-Taste im Eingabefeld
     terminalInput.addEventListener('keyup', function (event) {
+       // es muss ein name mit function uebergeben werden weil wir infos wie key bracuhen
         if (event.key === 'Enter') {
             const command = terminalInput.value.trim(); // Eingegebenen Text holen und Leerzeichen entfernen
 
@@ -46,12 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Funktion zur Befehlsverarbeitung
     function processCommand(command) {
-
+// das hier haette auch in  terminalInput.addEventListener( rein)
         command = command.toLowerCase(); //kleinmacchen
         command = command.trim(); // leere spaces weg
         let command_array = command.split(' ');
         command = command_array[[0]];
-        let command1 = command_array[command_array.length - 1];
+        let command1 = command_array[1];
 
         // so ist die ganze eingabe als var gespeichert
 
@@ -88,21 +93,21 @@ document.addEventListener('DOMContentLoaded', function() {
     function downloadFile(dateiname) {
 
 
-        // 1. Erstelle einen Link im Speicher
+       
         // Wir erstellen ein <a>-Element, so als ob es im HTML stehen würde
         const link = document.createElement('a');
+                                    // im ram des browser also nicht zu sehen
 
-
-        // 2. Setze den Pfad zur Datei
-        // Wir nehmen an, die Datei liegt in einem Ordner namens "files"
+        //Pfad zur Datei
         link.href = './src/' + dateiname;
+        
 
-        // 3. Setze den Dateinamen für den Download
-        // Das 'download'-Attribut ist der Trick!
+        
         // Es sagt dem Browser: "Nicht zu dieser Seite gehen, sondern herunterladen."
         link.download = dateiname;
+                    //das ist der name unter der gedoenloaded wird
 
-        // 4. Klicke (unsichtbar) auf den Link
+        // Klicke (unsichtbar) auf den Link
         // Wir simulieren einen Klick auf den Link, um den Download zu starten
         link.click();
     }
@@ -111,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const terminal = document.getElementById('terminal');
     terminal.addEventListener('click', function () {
         terminalInput.focus();
+        
     });
 });
     // Ende DOMContentLoaded
