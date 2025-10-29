@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         terminalOutput.appendChild(newLine);
         // der neue <p> wird an terminal output div angehängt 
         // Automatisch nach unten scrollen
-        terminalOutput.scrollTop = terminalOutput.scrollHeight;
-
+        // terminalOutput.scrollTop = terminalOutput.scrollHeight+10;
+// scroll auf länge der ganzen scroll height also gang unten im browser
     }
 
     const files = [
@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (command === 'clear') {
             terminalOutput.innerHTML = ''; // Leert die Ausgabe
 
-        } else if (command === 'hallo') {
-            printToTerminal("Hallo selbst!");
+        } else if (command === 'hello') {
+            printToTerminal("Hellooooooooooooo thanks for testing my site:-)!");
         } else if (command === 'ls') {
             printToTerminal(files.join('  '))
             //    macht die files zu einem string 
