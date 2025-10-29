@@ -7,6 +7,7 @@ body {
 /* === OBERER BEREICH: Bild links, Container rechts === */
 .upper {
     display: flex;
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto 40px auto;
     gap: 30px;
@@ -47,14 +48,14 @@ body {
 /* === RECHTE SEITE: Container mit Flip Cards === */
 .container {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     flex: 1;
 }
 
 /* === FLIP CARDS === */
 .flip-card {
-    width: 100%;
-    max-width: 350px;
+    width: calc(50% - 10px);
     height: 250px;
     cursor: pointer;
     perspective: 1000px;
@@ -79,13 +80,13 @@ body {
     align-items: center;
     padding: 20px;
     border-radius: 8px;
-    background-color: midnightblue;
+    background-color: rgba(69, 75, 80, 0.85);
     color: white;
     box-sizing: border-box;
 }
 
 .flip-card-back {
-    background-color: rebeccapurple;
+    background-color: rgba(44, 62, 80, 0.95);
     transform: rotateY(180deg);
     align-items: flex-start;
     justify-content: flex-start;
@@ -126,6 +127,7 @@ body {
     padding: 15px;
     height: 300px;
     overflow-y: scroll;
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
 }
