@@ -152,3 +152,25 @@ body {
     outline: none;
     width: 90%;
 }
+
+
+
+
+/* Definiere die Animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg); /* Start: 0 Grad Drehung */
+    }
+    to {
+        transform: rotate(360deg); /* Ende: 360 Grad Drehung */
+    }
+}
+
+/* Wende die Animation auf dein Element an */
+#loading-spinner {
+    display: inline-block; /* Wichtig, damit transform funktioniert */
+    animation-name: spin;
+    animation-duration: 2s;         /* Dauer: 2 Sekunden pro Drehung */
+    animation-iteration-count: 3; /* Wiederholung: unendlich */
+    animation-timing-function: linear; /* Gleichmäßige Geschwindigkeit */
+}

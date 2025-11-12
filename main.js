@@ -21,15 +21,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // terminalOutput.scrollTop = terminalOutput.scrollHeight+10;
 // scroll auf länge der ganzen scroll height also gang unten im browser
     }
+    // Funktion zum Hinzufügen von HTML zur Ausgabe
+    function printHTMLToTerminal(htmlString) {
+        const newElement = document.createElement('div'); // Nimm div statt p für HTML
+        newElement.innerHTML = htmlString; // Setze den HTML-String
+        terminalOutput.appendChild(newElement);
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
 
     const files = [
         "cv.pdf",
         "liebherr.jpeg",
     ];
     const commands = [
-        "help", "clear", "hello", "ls", "get [document]", "echo [text]"
+        "help", "clear", "hello", "ls", "get [document]", "echo [text]", "fastfetch", "spin"
     ]
-
     // Event Listener für die Enter-Taste im Eingabefeld
     terminalInput.addEventListener('keyup', function (event) {
        // es muss ein name mit function uebergeben werden weil wir infos wie key bracuhen
@@ -90,14 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const trimmedCommand = rawCommand.trim(); // Leere spaces weg
         let command_array = trimmedCommand.split(' '); // Teile beim Leerzeichen
 
-        // KORREKTUR 1: Nimm das erste Element als Befehl und mach NUR das klein
+        // Nimm das erste Element als Befehl und mach NUR das klein
         let command = command_array[0].toLowerCase();
 
-        // KORREKTUR 2: Nimm den REST der Elemente (ab Index 1) und füge sie wieder zusammen
+        // Nimm den REST der Elemente (ab Index 1) und füge sie wieder zusammen
         let argument = command_array.slice(1).join(' ');
 
         // 'command' ist jetzt z.B. "echo"
-        // 'argument' ist jetzt z.B. "Hallo Welt, dies ist ein Test"
+        // 'argument' ist jetzt z.B. "Hallo Welt, dies ist ein Test" easy
 
         if (command === 'help') {
             printToTerminal("commands: " + commands.join(', '));
@@ -125,7 +131,24 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (command === 'echo') { // <<< ECHO BEFEHL
             // Gib einfach die komplette 'argument'-Variable aus
             printToTerminal(argument);
+        } else if (command === 'fastfetch') { // <<< NEU HINZUGEFÜGT
+            showFastFetch(); // Ruft die neue Funktion auf
+        }else if(command === 'spin') {
 
+            printHTMLToTerminal('<p id="loading-spinner">           _..._\n' +
+                '         .\'     \'.\n' +
+                '        /  _   _  \\\n' +
+                '        | (o)_(o) |\n' +
+                '         \\(     ) /\n' +
+                '         //\'._.\'\\ \\\n' +
+                '        //   .   \\ \\\n' +
+                '       ||   .     \\ \\\n' +
+                '       |\\   :     / |\n' +
+                '       \\ `) \'   (`  /_\n' +
+                '     _)``".____,.\'"` (_\n' +
+                '     )     )\'--\'(     (\n' +
+                '      \'---`      `---`\n</p>')
+            //image from https://www.ascii-art.de/ascii/jkl/linux.txt
         } else {
             printToTerminal(`command not found: ${command}`);
         }
@@ -164,6 +187,31 @@ document.addEventListener('DOMContentLoaded', function() {
     terminal.addEventListener('click', function () {
         terminalInput.focus();
         
+
     });
+    function showFastFetch() {
+        // Du kannst jede beliebige ASCII-Art hier einfügen.
+        // Diese ist ein einfaches Beispiel.
+        const fastfetchOutput = `
+               dodo@dudu
+    .--.       -----------------------
+   |o_o |        OS: Web Browser
+   |:_/ |        Host: User's PC
+  //   \ \       Kernel: JavaScript (V8)
+ (|     | )      Uptime: 42 seconds maybe
+/'\_   _/'\      Shell: terminal.js
+\___)=(___/      Auflösung: ${window.innerWidth}x${window.innerHeight}
+                 CPU: Your Brain :0
+//den pinguin habe ich von https://www.ascii-art.de/ascii/jkl/linux.txt preznek borys
+              
+
+
+
+`;
+        // Wir übergeben den ganzen String an printToTerminal.
+        // Dank "white-space: pre-wrap;" im CSS wird es korrekt formatiert.
+        printToTerminal(fastfetchOutput);
+    }
+
 });
     // Ende DOMContentLoaded
