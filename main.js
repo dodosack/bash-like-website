@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "liebherr.jpeg",
     ];
     const commands = [
-        "help", "clear", "hello", "ls", "get [document]"
+        "help", "clear", "hello", "ls", "get [document]", "echo [text]"
     ]
 
     // Event Listener für die Enter-Taste im Eingabefeld
@@ -49,16 +49,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Funktion zur Befehlsverarbeitung
-    function processCommand(command) {
-// das hier haette auch in  terminalInput.addEventListener( rein)
-        command = command.toLowerCase(); //kleinmacchen
-        command = command.trim(); // leere spaces weg
-        let command_array = command.split(' ');
-        command = command_array[[0]];
-        let command1 = command_array[1];
+//     // Funktion zur Befehlsverarbeitung
+//     function processCommand(command) {
+// // das hier haette auch in  terminalInput.addEventListener( rein)
+//         command = command.toLowerCase(); //kleinmacchen
+//         command = command.trim(); // leere spaces weg
+//         let command_array = command.split(' ');
+//         command = command_array[[0]];
+//         let command1 = command_array[1];
+//
+//         // so ist die ganze eingabe als var gespeichert
+//
+//         if (command === 'help') {
+//             printToTerminal("commands: " + commands.join(', '));
+//         } else if (command === 'clear') {
+//             terminalOutput.innerHTML = ''; // Leert die Ausgabe
+//
+//         } else if (command === 'hello') {
+//             printToTerminal("Hellooooooooooooo thanks for testing my site:-)!");
+//         } else if (command === 'ls') {
+//             printToTerminal(files.join('  '))
+//             //    macht die files zu einem string 
+//
+//         } else if (command === 'get') {
+//             if (allowed_download(command1)) {
+//                 downloadFile(command1);
+//                 printToTerminal(`$ ${command1} downloaded!`);
+//
+//             } else {
+//                 printToTerminal(`$ no ${command1} !`);
+//             }
+//         } else {
+//             printToTerminal(`command not found: ${command}`);
+//         }
+//     }
 
-        // so ist die ganze eingabe als var gespeichert
+    // Funktion zur Befehlsverarbeitung
+    function processCommand(rawCommand) { // Nimm die rohe Eingabe
+
+        const trimmedCommand = rawCommand.trim(); // Leere spaces weg
+        let command_array = trimmedCommand.split(' '); // Teile beim Leerzeichen
+
+        // KORREKTUR 1: Nimm das erste Element als Befehl und mach NUR das klein
+        let command = command_array[0].toLowerCase();
+
+        // KORREKTUR 2: Nimm den REST der Elemente (ab Index 1) und füge sie wieder zusammen
+        let argument = command_array.slice(1).join(' ');
+
+        // 'command' ist jetzt z.B. "echo"
+        // 'argument' ist jetzt z.B. "Hallo Welt, dies ist ein Test"
 
         if (command === 'help') {
             printToTerminal("commands: " + commands.join(', '));
@@ -72,18 +111,26 @@ document.addEventListener('DOMContentLoaded', function() {
             //    macht die files zu einem string 
 
         } else if (command === 'get') {
-            if (allowed_download(command1)) {
-                downloadFile(command1);
-                printToTerminal(`$ ${command1} downloaded!`);
+            // Verwende jetzt die 'argument' Variable
+            if (argument && allowed_download(argument)) {
+                downloadFile(argument);
+                printToTerminal(`$ ${argument} downloaded!`);
 
-            } else {
-                printToTerminal(`$ no ${command1} !`);
+            } else if (argument) { // Falls Argument da, aber nicht erlaubt
+                printToTerminal(`$ no ${argument} !`);
+            } else { // Falls kein Argument da
+                printToTerminal("Benutzung: get <dateiname>");
             }
+
+        } else if (command === 'echo') { // <<< ECHO BEFEHL
+            // Gib einfach die komplette 'argument'-Variable aus
+            printToTerminal(argument);
+
         } else {
             printToTerminal(`command not found: ${command}`);
         }
     }
-
+    
 
     function allowed_download(dateiname) {
         return files.includes(dateiname);
