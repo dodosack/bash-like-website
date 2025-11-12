@@ -80,7 +80,7 @@ body {
     align-items: center;
     padding: 20px;
     border-radius: 8px;
-    background-color: rgba(69, 75, 80, 0.85);
+    background-color: dimgrey;
     color: white;
     box-sizing: border-box;
 }
